@@ -5,211 +5,179 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dastaan'26</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
 
+/* 🌌 EMERALD BACKGROUND */
 body{
   margin:0;
   font-family:'Poppins',sans-serif;
-  color:#fff;
-  background:linear-gradient(135deg,#0f3d2e,#000);
+  color:white;
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    url("https://images.unsplash.com/photo-1604079628040-94301bb21b91");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
+
+/* SECTION */
+section{
   min-height:100vh;
+  padding:80px 20px;
   display:flex;
-  justify-content:center;
+  flex-direction:column;
   align-items:center;
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:10px;
-  border:1px solid gold;
-  pointer-events:none;
-}
-
-/* INTRO */
-#intro{
-  position:fixed;
-  inset:0;
-  display:flex;
   justify-content:center;
-  align-items:center;
-  background:radial-gradient(circle,#0f3d2e,#000);
-  z-index:9999;
-  overflow:hidden;
 }
-.intro-text{
-  font-family:'Great Vibes';
-  font-size:90px;
-  color:gold;
-  text-shadow:0 0 20px gold;
-  animation:fadeIn 3s ease forwards;
-}
-#intro::before{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:radial-gradient(circle,rgba(255,215,0,0.1) 1px,transparent 1px);
-  background-size:40px 40px;
-  animation:moveParticles 10s linear infinite;
-  opacity:0.2;
-}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes moveParticles{to{transform:translateY(-100px);}}
 
-/* PAGE */
-.page{display:none;text-align:center;padding:30px;}
-.page.active{display:block;}
-
+/* TITLE */
 .title{
-  font-family:'Great Vibes';
-  font-size:70px;
+  font-family:'Playfair Display';
+  font-size:60px;
   color:gold;
 }
-
-.main-text{
-  max-width:700px;
-  margin:20px auto;
-  line-height:1.8;
+.title span{
+  font-family:'Great Vibes';
+  font-size:85px;
 }
 
-/* CARDS */
-.cards{
+/* TEXT */
+.main-text{
+  max-width:750px;
+  text-align:center;
+  line-height:1.7;
+  margin-top:20px;
+}
+
+/* NAV */
+.nav{
   margin-top:40px;
   display:flex;
-  gap:25px;
-  justify-content:center;
-  flex-wrap:wrap;
+  gap:20px;
 }
-.card{
-  width:220px;
-  padding:25px;
+.nav div{
+  padding:12px 25px;
   border:1px solid gold;
-  border-radius:15px;
+  border-radius:10px;
   cursor:pointer;
-  transition:0.3s;
 }
-.card:hover{
-  transform:translateY(-10px) scale(1.05);
+.nav div:hover{
   background:gold;
   color:black;
 }
 
-/* EVENT CARD */
-.event-card{
-  max-width:700px;
-  margin:auto;
-  padding:30px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-  border:1px solid gold;
+/* EVENT */
+.event-title{
+  font-size:45px;
+  color:gold;
+  margin-bottom:40px;
 }
 
 .event-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap:30px;
+  max-width:900px;
+  width:100%;
+}
+
+.card{
+  padding:25px;
+  background:rgba(0,0,0,0.65);
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,215,0,0.3);
+  text-align:center;
+}
+
+/* TIMER */
+.timer{
+  grid-column: span 2;
+  display:flex;
+  justify-content:center;
   gap:20px;
-  text-align:left;
+  padding:30px;
+  border:2px solid gold;
+  border-radius:20px;
+  box-shadow:0 0 25px gold;
+}
+
+.time-box{
+  background:rgba(0,0,0,0.7);
+  padding:15px 20px;
+  border-radius:12px;
+  border:1px solid rgba(255,215,0,0.4);
+}
+
+.time-box span{
+  font-size:28px;
+  color:gold;
 }
 
 /* RESERVE */
-.reserve-card{
-  padding:40px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(12px);
-  border:1px solid gold;
-  width:300px;
-  margin:auto;
-}
-.input-group{
-  position:relative;
-  margin-top:15px;
-}
-.input-group input{
-  width:100%;
+input{
   padding:12px;
-  border:1px solid gold;
-  border-radius:10px;
-  background:transparent;
-  color:white;
-}
-.input-group label{
-  position:absolute;
-  left:10px;
-  top:50%;
-  transform:translateY(-50%);
-  transition:0.3s;
-  opacity:0.7;
-}
-.input-group input:focus + label,
-.input-group input:valid + label{
-  top:-10px;
-  font-size:12px;
-}
-.reserve-btn{
-  margin-top:20px;
-  width:100%;
-  padding:12px;
-  background:gold;
+  width:250px;
+  border-radius:8px;
   border:none;
-  border-radius:10px;
 }
 
-/* TICKET */
-.ticket-box{
-  padding:25px;
-  width:320px;
-  border-radius:20px;
-  border:2px solid gold;
-  background:linear-gradient(135deg,#0f3d2e,#021a13);
-}
-.ticket-header{
-  font-size:12px;
-  color:gold;
-}
-.ticket-title{
-  font-family:'Great Vibes';
-  font-size:35px;
-  color:gold;
-}
-.ticket-divider{
-  height:1px;
-  background:linear-gradient(to right,transparent,gold,transparent);
-  margin:15px 0;
-}
-
-/* BUTTON */
 button{
   margin-top:15px;
-  padding:10px;
+  padding:12px 25px;
   background:gold;
   border:none;
   border-radius:8px;
   cursor:pointer;
 }
-button:hover{transform:scale(1.05);}
+
+/* 🎟 POPUP */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.7);
+}
+
+.ticket{
+  background:black;
+  padding:30px;
+  border-radius:20px;
+  border:2px solid gold;
+  text-align:center;
+  box-shadow:0 0 30px gold;
+}
 
 /* CONFETTI */
 .confetti{
-  position:absolute;
-  width:6px;
-  height:6px;
+  position:fixed;
+  width:8px;
+  height:8px;
   background:gold;
-  animation:fall 2s linear forwards;
+  top:-10px;
+  animation:fall linear forwards;
 }
-@keyframes fall{to{transform:translateY(400px);opacity:0;}}
 
+@keyframes fall{
+  to{
+    transform:translateY(100vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* MOBILE */
 @media(max-width:768px){
-  .title{font-size:50px;}
-  .card{width:80%;}
-  .event-grid{grid-template-columns:1fr;}
+  .event-grid{
+    grid-template-columns:1fr;
+  }
+  .timer{
+    flex-wrap:wrap;
+  }
 }
 
 </style>
@@ -217,130 +185,140 @@ button:hover{transform:scale(1.05);}
 
 <body>
 
-<div id="intro"><div class="intro-text">Dastaan'26</div></div>
-
-<audio id="music" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
-
-<!-- HOME -->
-<div id="home" class="page active">
-  <div class="title">Dastaan'26</div>
+<!-- HERO -->
+<section id="home">
+  <div class="title"><span>Dastaan</span>'26</div>
 
   <p class="main-text">
-  Welcome to the opening chapter of your greatest adventure. Dastaan 2026 isn't just a party; it’s the prologue to your college legacy. Tonight, we trade the textbooks for the spotlight and the mundane for the magical. Step into the narrative, meet your co-stars, and let’s make the first page unforgettable.
+  Welcome to the opening chapter of your greatest adventure. Dastaan 2026 isn't just a party; it’s the prologue to your college legacy.
   </p>
 
-  <div class="cards">
-    <div class="card" onclick="showPage('location')">📍 Event Details</div>
-    <div class="card" onclick="showPage('reserve')">🎟️ Reserve Seat</div>
-    <div class="card" onclick="showPage('about')">ℹ️ About Us</div>
+  <div class="nav">
+    <div onclick="go('event')">Event</div>
+    <div onclick="go('reserve')">Reserve</div>
+    <div onclick="go('about')">About</div>
   </div>
-</div>
+</section>
 
 <!-- EVENT -->
-<div id="location" class="page">
-  <div class="event-card">
-    <h2>Event Details</h2>
-    <div class="event-grid">
-      <div>📍 Ayaan Institute of Medical Sciences</div>
-      <div>📅 7 April 2026</div>
-      <div>⏰ 9 AM</div>
-      <div>👔 Elegant Attire</div>
-    </div>
-    <iframe src="https://maps.google.com/maps?q=Ayaan%20Institute&output=embed" width="100%" height="250"></iframe>
-    <button onclick="showPage('home')">Back</button>
-  </div>
-</div>
+<section id="event">
+  <h1 class="event-title">Event Details</h1>
 
-<!-- ABOUT -->
-<div id="about" class="page">
-  <div class="event-card">
-    <h2>About Dastaan'26</h2>
-    <p>
-    Dastaan 2026 marks the beginning of a journey beyond academics. 
-    A night where strangers become friends and stories begin.
-    </p>
-    <button onclick="showPage('home')">Back</button>
+  <div class="event-grid">
+
+    <div class="card">
+      <h3>🏥 Venue</h3>
+      <p>Ayaan Institute of Medical Sciences</p>
+    </div>
+
+    <div class="card">
+      <h3>📅 Date</h3>
+      <p>7 April 2026</p>
+    </div>
+
+    <div class="timer">
+      <div class="time-box"><span id="d"></span><p>Days</p></div>
+      <div class="time-box"><span id="h"></span><p>Hours</p></div>
+      <div class="time-box"><span id="m"></span><p>Min</p></div>
+      <div class="time-box"><span id="s"></span><p>Sec</p></div>
+    </div>
+
+    <div class="card">
+      <h3>⏰ Time</h3>
+      <p>9 AM</p>
+    </div>
+
+    <div class="card">
+      <h3>👔 Dress Code</h3>
+      <p>Elegant Attire</p>
+    </div>
+
   </div>
-</div>
+</section>
 
 <!-- RESERVE -->
-<div id="reserve" class="page">
-  <div class="reserve-card">
-    <h2>Reserve Your Seat</h2>
-    <div class="input-group">
-      <input type="text" id="name" required>
-      <label>Your Name</label>
-    </div>
-    <button class="reserve-btn" onclick="reserve()">Enter Dastaan</button>
-  </div>
-</div>
+<section id="reserve">
+  <h1 style="color:gold;">Reserve Your Seat</h1>
+  <input id="name" placeholder="Enter your name">
+  <br>
+  <button onclick="generateTicket()">Enter Dastaan</button>
+</section>
 
-<!-- SUCCESS -->
-<div id="success" class="page">
-  <div class="ticket-box" id="ticketCard">
-    <div class="ticket-header">VIP ENTRY PASS</div>
-    <div class="ticket-title">Dastaan'26</div>
-    <p id="userName"></p>
-    <div class="ticket-divider"></div>
+<!-- ABOUT -->
+<section id="about">
+  <h1 style="color:gold;">About</h1>
+  <p style="max-width:700px;text-align:center;">
+    Dastaan 2026 marks the beginning of your journey into college life.
+  </p>
+</section>
+
+<!-- POPUP -->
+<div class="overlay" id="overlay" onclick="closeTicket(event)">
+  <div class="ticket" onclick="event.stopPropagation()">
+    <h2>🎟 Dastaan'26</h2>
+    <p id="user"></p>
     <p id="seat"></p>
-    <p id="ticket"></p>
-    <div id="qrcode"></div>
-    <button class="download-btn" onclick="downloadTicket()">Download Ticket</button>
+    <p id="id"></p>
+    <canvas id="qr"></canvas>
   </div>
 </div>
 
 <script>
 
-setTimeout(()=>document.getElementById("intro").style.display="none",3000);
-
-document.addEventListener("click",()=>document.getElementById("music").play(),{once:true});
-
-function showPage(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById(id).classList.add("active");
+/* NAV */
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-function reserve(){
-let name=document.getElementById("name").value;
-if(!name)return alert("Enter name");
+/* TIMER */
+const eventDate = new Date("April 7, 2026 09:00:00").getTime();
 
-let id="DSTN-"+Math.floor(Math.random()*100000);
-let seat=Math.floor(Math.random()*150)+1;
+setInterval(()=>{
+  let now = new Date().getTime();
+  let diff = eventDate - now;
 
-document.getElementById("userName").innerText="Welcome, "+name;
-document.getElementById("seat").innerText="Seat: "+seat;
-document.getElementById("ticket").innerText="Ticket ID: "+id;
+  document.getElementById("d").innerText = Math.floor(diff/(1000*60*60*24));
+  document.getElementById("h").innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  document.getElementById("m").innerText = Math.floor((diff%(1000*60*60))/(1000*60));
+  document.getElementById("s").innerText = Math.floor((diff%(1000*60))/1000);
 
-QRCode.toCanvas(document.getElementById("qrcode"),id);
+},1000);
 
-showPage("success");
+/* TICKET */
+function generateTicket(){
 
-let interval=setInterval(()=>{
-for(let i=0;i<8;i++){
-let c=document.createElement("div");
-c.className="confetti";
-c.style.left=Math.random()*100+"vw";
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),2000);
+  let name=document.getElementById("name").value;
+  if(name===""){ alert("Enter your name"); return; }
+
+  let seat=Math.floor(Math.random()*150)+1;
+  let id="DSTN-"+Math.floor(Math.random()*100000);
+
+  document.getElementById("user").innerText="👤 "+name;
+  document.getElementById("seat").innerText="💺 Seat "+seat;
+  document.getElementById("id").innerText="🆔 "+id;
+
+  QRCode.toCanvas(document.getElementById("qr"), id);
+
+  document.getElementById("overlay").style.display="flex";
+
+  for(let i=0;i<80;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=(Math.random()*2+2)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
 }
-},200);
 
-setTimeout(()=>clearInterval(interval),5000);
-}
+/* 🔥 FIXED CLOSE */
+function closeTicket(){
+  document.getElementById("overlay").style.display="none";
 
-function downloadTicket(){
-let btn=document.querySelector(".download-btn");
-btn.style.display="none";
-
-html2canvas(document.getElementById("ticketCard"),{scale:2}).then(c=>{
-let link=document.createElement("a");
-link.download="ticket.png";
-link.href=c.toDataURL();
-link.click();
-btn.style.display="block";
-});
+  /* GO BACK TO HERO */
+  document.getElementById("home").scrollIntoView({
+    behavior:"smooth"
+  });
 }
 
 </script>
